@@ -263,7 +263,25 @@ public class App {
      * Task for : Mohamed Walid && Mohamed Yehia
      * For a specific chat room search for a message
      */
-    void searchForMessageHint(/*Your parameters here */) {
+      void helperFun(int chatId)throws SQLException{//add sender name about senderId
+        query="select name from chatroom where id=?";
+        preQuery=con.prepareStatement(query);
+        preQuery.setInt(1,chatId);
+        result=preQuery.executeQuery();
+        System.out.println(result.getString("name"));
+
+    }
+    void searchForMessageHint(String txt)throws SQLException {
+        query="select messageText,date,chatid from message where messageText like '%?%'";
+        preQuery=con.prepareStatement(query);
+
+        preQuery.setString(1,txt);
+        result=preQuery.executeQuery();
+        while(result.next()){
+            System.out.println(result.getString("messageText"));
+            System.out.println(result.getDate("date"));
+            helperFun(result.getInt("chatid"));
+        }
 
     }
 }
