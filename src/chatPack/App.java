@@ -196,7 +196,18 @@ public class App {
      * Task for : Mohamed Walid
      * UNDO your sent messages
      */
-    void deleteMessage(/*Your parameters here */) {
+    //the purpose of this fun is delete all message
+     void deleteAllMessages(int chatId)throws SQLException  {//today.............................................
+        query="delete from message where chatid=?";
+        preQuery = con.prepareStatement(query);
+        preQuery.setInt(1,chatId);
+    }
+   // the purpose of this fun is delete specific message
+    void deleteSpecificMessage(int chatId,int id)throws SQLException{//today...................................
+        query="delete from message where chatid=? and id=?";
+        preQuery = con.prepareStatement(query);
+        preQuery.setInt(1,chatId);
+        preQuery.setInt(2,id);
 
     }
 
